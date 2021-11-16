@@ -11,10 +11,12 @@
     "prettier/prettier": 2 ,
     "no-use-before-define": ["error", { "functions": true, "classes": true }],
     "no-var": "error",
-    "prefer-const": "error"
+    "prefer-const": "error",
+    "no-console": 0
   },
   "parserOptions": {
-    "ecmaVersion": 2017
+    "ecmaVersion": 6,
+    "sourceType": "module"
   },
   "env": {
     "node": true,
