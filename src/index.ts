@@ -1,6 +1,6 @@
 import express from 'express';
 import routes from './routes/api';
-import images from './routes/api/image';
+import images from './routes/api/images';
 
 const app = express();
 const port = 3000;
