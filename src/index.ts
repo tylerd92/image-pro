@@ -3,7 +3,7 @@ import routes from './routes/api';
 import images from './routes/api/images';
 
 const app = express();
-const port = 3000;
+const port = 7000;
 
 app.use('/api', routes);
 
@@ -12,3 +12,5 @@ app.use('/api/images', images);
 app.listen(port, () => {
   console.log(`listening at port: ${port}`);
 });
+
+export default app;
