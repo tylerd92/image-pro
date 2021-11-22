@@ -18,5 +18,4 @@ const resizeImage = async (filename: string, width: number, height: number) => {
     });
 };
 
-resizeImage('fjord', 300, 200);
 export default resizeImage;

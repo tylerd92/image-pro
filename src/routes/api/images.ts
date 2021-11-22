@@ -1,17 +1,23 @@
-import express from 'express';
-const images = express.Router();
+import { Request, Response, Router } from 'express';
+import resizeImage from '../../utilities/utilities';
 
-// need to create a route for resizing image
-// create a method in the utilities file to access
-// the file in the assets folder and use Sharpe to resize the file
-// add typing after code works
+const images = Router();
+
+interface ImageRequest {
+  fileName: string,
+  width: number,
+  height: number
+}
+
 //Example request
 //http://localhost:3000/api/images/?filename=argentina&width=200&height=200
-images.get('/', (req, res) => {
+
+images.get('/', (req: Request<{}, {}, {}, ImageRequest>, res: Response) => {
   const { fileName, width, height } = req.query;
   // send filename, width, and height to utility function
   // after function is called show the processed image on the screen
   // (also processed image is in the thumb folder)
+  resizeImage(fileName, width, height);
   res.send(req.query);
 });
 
