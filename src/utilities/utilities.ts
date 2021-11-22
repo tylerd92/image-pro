@@ -4,10 +4,9 @@ const appRoot = require('app-root-path') + '/';
 const assetsPath = appRoot + 'assets/';
 
 const resizeImage = async (filename: string, width: number, height: number) => {
-  const inputFilePath = assetsPath + `/full/${filename}`;
+  const inputFilePath = assetsPath + `/full/${filename}.jpg`;
 
-  const filearr = filename.split('.');
-  const outputFilename = filearr[0] + '_thumb' + '.png';
+  const outputFilename = filename + '_thumb' + '.png';
   const outputFilePath = assetsPath + `thumb/${outputFilename}`;
 
   await sharp(inputFilePath)
@@ -19,4 +18,5 @@ const resizeImage = async (filename: string, width: number, height: number) => {
     });
 };
 
+resizeImage('fjord', 300, 200);
 export default resizeImage;
