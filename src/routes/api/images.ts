@@ -17,7 +17,4 @@ images.get('/', (req, res) => {
   res.send(req.query);
 });
 
-
-
-
 export default images;
