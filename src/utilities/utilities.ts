@@ -18,4 +18,10 @@ const resizeImage = async (filename: string, width: number, height: number) => {
     });
 };
 
-export default resizeImage;
+// checks if the thumbnail all ready exists
+const thumbnailPath = (filename: string) => {
+  const outputFilename = filename + '_thumb' + '.png';
+  return assetsPath + `thumb/${outputFilename}`;
+} 
+
+export default { resizeImage, thumbnailPath};
