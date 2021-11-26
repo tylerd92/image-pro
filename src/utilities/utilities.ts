@@ -1,4 +1,5 @@
 import sharp from 'sharp';
+import imageCache from './imageCache';
 
 const appRoot = require('app-root-path') + '/';
 const assetsPath = appRoot + 'assets/';
@@ -12,13 +13,17 @@ const resizeImage = async (filename: string, width: number, height: number) => {
   await sharp(inputFilePath)
     .resize(width, height)
     .toFile(outputFilePath)
-    .then((result) => console.log('Image processed'))
+    .then((result) => {
+      console.log('Image processed');
+      imageCache.addImage(filename, outputFilePath);
+    })
     .catch((error) => {
       throw new Error('Input file is missing');
     });
 };
 
 // checks if the thumbnail all ready exists
+// not sure if I need this function will review if needed
 const thumbnailPath = (filename: string) => {
   const outputFilename = filename + '_thumb' + '.png';
   return assetsPath + `thumb/${outputFilename}`;

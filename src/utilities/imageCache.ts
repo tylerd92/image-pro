@@ -1,12 +1,21 @@
-interface ImageCache {
-  filename?: string,
-  filepath?: string
+interface Image {
+  filename: string,
+  filepath: string
 }
 
-let cache: ImageCache = {};
+let cache: Image[] = [];
 
 const addImage = (filename: string, filepath: string) => {
-  cache.filename = filepath;
+  cache.push({ filename, filepath })
 }
 
-export default { cache, addImage };
+const getImage = (filename: string) => {
+  for (let i = 0; i < cache.length; i++) {
+    if (cache[i].filename == filename) {
+      return {filename: cache[i].filename, filepath: cache[i].filepath};
+    }
+  }
+  return null;
+}
+
+export default { cache, addImage, getImage };

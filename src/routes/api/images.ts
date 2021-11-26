@@ -1,5 +1,6 @@
 import { Request, Response, Router } from 'express';
 import utilities from '../../utilities/utilities';
+import imageCache from '../../utilities/imageCache';
 
 const images = Router();
 
@@ -16,12 +17,19 @@ images.get('/', async (req: Request<{}, {}, {}, ImageRequest>, res: Response) =>
   const filename: string = req.query.filename;
   const height: number = Number(req.query.height);
   const width: number = Number(req.query.width);
-  console.log(typeof width);
   
-  // if file was already created don't call the file
-  // create a cache of files
-  await utilities.resizeImage(filename, width, height);
-  res.sendFile(utilities.thumbnailPath(filename));
+  try {
+    let image = imageCache.getImage(filename);
+    if(image === null) {
+      await utilities.resizeImage(filename, width, height);
+      res.sendFile(utilities.thumbnailPath(filename));
+    } else {
+      res.sendFile(image.filepath);
+    }
+  } catch (error) {
+    res.send('image not found');
+  }
+  
 });
 
 export default images;
