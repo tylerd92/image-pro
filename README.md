@@ -1,6 +1,6 @@
 # image-pro
 
-## How to run the program
+### How to run the program
 
 Use npm run start to run the dev server
 
@@ -13,11 +13,11 @@ If the image is in the assets/full folder then you should see the resized new im
 
 If the image is not there then you will see a message saying the image is not found on the web page.
 
-## How to run unit tests
+### How to run unit tests
 npm run test 
 
-## How to run eslint
+### How to run eslint
 npm run lint
 
-## How to run prettier 
+### How to run prettier 
 npm run prettier
