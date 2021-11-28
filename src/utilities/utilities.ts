@@ -27,6 +27,6 @@ const resizeImage = async (filename: string, width: number, height: number) => {
 const thumbnailPath = (filename: string) => {
   const outputFilename = filename + '_thumb' + '.png';
   return assetsPath + `thumb/${outputFilename}`;
-} 
+};
 
-export default { resizeImage, thumbnailPath};
+export default { resizeImage, thumbnailPath };
