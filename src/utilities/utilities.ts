@@ -22,8 +22,6 @@ const resizeImage = async (filename: string, width: number, height: number) => {
     });
 };
 
-// checks if the thumbnail all ready exists
-// not sure if I need this function will review if needed
 const thumbnailPath = (filename: string) => {
   const outputFilename = filename + '_thumb' + '.png';
   return assetsPath + `thumb/${outputFilename}`;

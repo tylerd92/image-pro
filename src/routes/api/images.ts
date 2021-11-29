@@ -10,11 +10,6 @@ interface ImageRequest {
   height: number;
 }
 
-/*
-Example request
-http://localhost:3000/api/images/?filename=argentina&width=200&height=200
-*/
-
 images.get(
   '/',
   async (
