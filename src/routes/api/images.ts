@@ -1,4 +1,4 @@
-import { Request, Response, Router } from 'express';
+import { Request, response, Response, Router } from 'express';
 import utilities from '../../utilities/utilities';
 import imageCache from '../../utilities/imageCache';
 
@@ -37,5 +37,10 @@ images.get(
     }
   }
 );
+
+images.get('/clearCache', async (req, res) => {
+  await imageCache.clearCache();
+  res.send('cache cleared');
+});
 
 export default images;

@@ -4,14 +4,22 @@ import imageCache from './imageCache';
 const appRoot = require('app-root-path') + '/';
 const assetsPath = appRoot + 'assets/';
 
-const thumbnailPath = (filename: string, width: number, height: number): string => {
+const thumbFilename = (
+  filename: string,
+  width: number,
+  height: number
+): string => {
+  return `${filename}_${width}x${height}.png`;
+};
+
+const thumbnailPath = (
+  filename: string,
+  width: number,
+  height: number
+): string => {
   const outputFilename = thumbFilename(filename, width, height); //filename + '_thumb' + '.png';
   return assetsPath + `thumb/${outputFilename}`;
 };
-
-const thumbFilename = (filename: string, width: number, height: number): string => {
-  return `${filename}_${width}x${height}.png`;
-}
 
 const resizeImage = async (filename: string, width: number, height: number) => {
   const inputFilePath = assetsPath + `/full/${filename}.jpg`;
@@ -25,7 +33,6 @@ const resizeImage = async (filename: string, width: number, height: number) => {
     .then((result) => {
       console.log('Image processed');
       imageCache.addImage(outputFilename, outputFilePath);
-      console.log(imageCache);
     })
     .catch((error) => {
       throw new Error('Input file is missing');

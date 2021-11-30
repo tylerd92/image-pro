@@ -1,4 +1,4 @@
-import {promises as fsPromises} from 'fs';
+import { promises as fsPromises } from 'fs';
 
 const utilitiesPath = require('app-root-path') + '/src/utilities';
 
@@ -10,13 +10,19 @@ interface Image {
 let cache: Image[] = [];
 
 const initializeCache = async () => {
-  const jsonFromFile = await fsPromises.open(`${utilitiesPath}/cache.json`, 'r');
-  let result = await jsonFromFile.readFile("utf8");
+  const jsonFromFile = await fsPromises.open(
+    `${utilitiesPath}/cache.json`,
+    'r'
+  );
+  const result = await jsonFromFile.readFile('utf8');
   cache = JSON.parse(result.toString());
+  await jsonFromFile.close();
 };
 
-const addImage = (filename: string, filepath: string) => {
+const addImage = async (filename: string, filepath: string) => {
   cache.push({ filename, filepath });
+  const cacheStr = JSON.stringify(cache);
+  await fsPromises.writeFile(`${utilitiesPath}/cache.json`, cacheStr);
 };
 
 const getImage = (filename: string) => {
@@ -29,8 +35,10 @@ const getImage = (filename: string) => {
 };
 
 // create a function to clear the cache from disk
-const clearCache = async() => {
-  const jsonFromFile = await fsPromises.open(`${utilitiesPath}/cache.json`, 'w');
-}
+const clearCache = async () => {
+  cache = [];
+  await fsPromises.writeFile(`${utilitiesPath}/cache.json`, '');
+  console.log('cache cleared');
+};
 
- export default { cache, addImage, getImage, initializeCache };
+export default { cache, addImage, getImage, initializeCache, clearCache };
