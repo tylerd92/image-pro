@@ -1,9 +1,19 @@
+import {promises as fsPromises} from 'fs';
+
+const utilitiesPath = require('app-root-path') + '/src/utilities';
+
 interface Image {
   filename: string;
   filepath: string;
 }
 
-const cache: Image[] = [];
+let cache: Image[] = [];
+
+const initializeCache = async () => {
+  const jsonFromFile = await fsPromises.open(`${utilitiesPath}/cache.json`, 'r');
+  let result = await jsonFromFile.readFile("utf8");
+  cache = JSON.parse(result.toString());
+};
 
 const addImage = (filename: string, filepath: string) => {
   cache.push({ filename, filepath });
@@ -18,4 +28,4 @@ const getImage = (filename: string) => {
   return null;
 };
 
-export default { cache, addImage, getImage };
+ export default { cache, addImage, getImage, initializeCache };

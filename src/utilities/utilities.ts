@@ -25,6 +25,7 @@ const resizeImage = async (filename: string, width: number, height: number) => {
     .then((result) => {
       console.log('Image processed');
       imageCache.addImage(outputFilename, outputFilePath);
+      console.log(imageCache);
     })
     .catch((error) => {
       throw new Error('Input file is missing');

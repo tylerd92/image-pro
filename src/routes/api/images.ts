@@ -10,6 +10,8 @@ interface ImageRequest {
   height: number;
 }
 
+imageCache.initializeCache();
+
 images.get(
   '/',
   async (
