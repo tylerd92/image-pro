@@ -28,4 +28,9 @@ const getImage = (filename: string) => {
   return null;
 };
 
+// create a function to clear the cache from disk
+const clearCache = async() => {
+  const jsonFromFile = await fsPromises.open(`${utilitiesPath}/cache.json`, 'w');
+}
+
  export default { cache, addImage, getImage, initializeCache };
