@@ -21,10 +21,11 @@ images.get(
     const width = Number(req.query.width);
 
     try {
-      const image = imageCache.getImage(filename);
+      const imageFilename = utilities.thumbFilename(filename, width, height);
+      const image = imageCache.getImage(imageFilename);
       if (image === null) {
         await utilities.resizeImage(filename, width, height);
-        res.sendFile(utilities.thumbnailPath(filename));
+        res.sendFile(utilities.thumbnailPath(filename, width, height));
       } else {
         console.log('using cache');
         res.sendFile(image.filepath);
