@@ -18,29 +18,30 @@ images.get(
     req: Request<unknown, unknown, unknown, ImageRequest>,
     res: Response
   ) => {
-    const filename: string = req.query.filename;
+    let filename: string = req.query.filename;
     const height = Number(req.query.height);
     const width = Number(req.query.width);
-
-    try {
-      const imageFilename = utilities.thumbFilename(filename, width, height);
-      const image = imageCache.getImage(imageFilename);
-      if (image === null) {
-        await utilities.resizeImage(filename, width, height);
-        res.sendFile(utilities.thumbnailPath(filename, width, height));
-      } else {
-        console.log('using cache');
-        res.sendFile(image.filepath);
+    if (width === 0 || height === 0) {
+      res.send(
+        'Please enter number that is greater than zero for the width and height'
+      );
+    } else {
+      try {
+        filename = filename.toLowerCase();
+        const imageFilename = utilities.thumbFilename(filename, width, height);
+        const image = imageCache.getImage(imageFilename);
+        if (image === null) {
+          await utilities.resizeImage(filename, width, height);
+          res.sendFile(utilities.thumbnailFilePath(filename, width, height));
+        } else {
+          console.log('using cache');
+          res.sendFile(image.filepath);
+        }
+      } catch (error) {
+        res.send('image not found');
       }
-    } catch (error) {
-      res.send('image not found');
     }
   }
 );
-
-images.get('/clearCache', async (req, res) => {
-  await imageCache.clearCache();
-  res.send('cache cleared');
-});
 
 export default images;
