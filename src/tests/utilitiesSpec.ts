@@ -6,4 +6,8 @@ describe('Test resizeImage function', () => {
       utilities.resizeImage('notfound', 300, 200)
     ).toBeRejectedWith(new Error('Input file is missing'));
   });
+
+  it ('should create a resized image', async () => {
+    utilities.resizeImage('fjord', 400, 400); 
+  });
 });
