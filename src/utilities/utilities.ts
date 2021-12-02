@@ -2,7 +2,7 @@ import sharp from 'sharp';
 import imageCache from './imageCache';
 
 const appRoot = require('app-root-path') + '/';
-const assetsPath = appRoot + 'assets/';
+const assetsPath = appRoot + 'assets';
 
 const getThumbFilePath = (): string => {
   return `${assetsPath}/thumb`;
@@ -22,7 +22,7 @@ const thumbnailFilePath = (
   height: number
 ): string => {
   const outputFilename = thumbFilename(filename, width, height);
-  return assetsPath + `thumb/${outputFilename}`;
+  return assetsPath + `/thumb/${outputFilename}`;
 };
 
 const resizeImage = async (filename: string, width: number, height: number) => {
