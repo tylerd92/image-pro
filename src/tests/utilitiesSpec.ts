@@ -7,7 +7,11 @@ describe('Test resizeImage function', () => {
     ).toBeRejectedWith(new Error('Input file is missing'));
   });
 
-  it ('should create a resized image', async () => {
-    utilities.resizeImage('fjord', 400, 400); 
+  it ('should resolve when called', async () => {
+    const width = 800;
+    const height = 800;
+    await expectAsync(
+      utilities.resizeImage('fjord', width, height)
+    ).toBeResolved();
   });
 });
