@@ -22,7 +22,7 @@ images.get(
     const height = Number(req.query.height);
     const width = Number(req.query.width);
     if (width === 0 || height === 0) {
-      res.send(
+      res.status(500).send(
         'Please enter number that is greater than zero for the width and height'
       );
     } else {
@@ -35,10 +35,10 @@ images.get(
           res.sendFile(utilities.thumbnailFilePath(filename, width, height));
         } else {
           console.log('using cache');
-          res.sendFile(image.filepath);
+          res.status(200).sendFile(image.filepath);
         }
       } catch (error) {
-        res.send('image not found');
+        res.status(500).send('image not found');
       }
     }
   }

@@ -6,6 +6,7 @@ interface Image {
   filepath: string;
 }
 
+// change cache data structure to a dictionary like object
 const cache: Image[] = [];
 
 const initializeCache = async () => {
