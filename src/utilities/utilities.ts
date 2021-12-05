@@ -35,7 +35,6 @@ const resizeImage = async (filename: string, width: number, height: number) => {
     .resize(width, height)
     .toFile(outputFilePath)
     .then((result) => {
-      console.log('Image processed');
       imageCache.addImage(outputFilename, outputFilePath);
     })
     .catch((error) => {

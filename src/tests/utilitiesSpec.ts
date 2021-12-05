@@ -7,7 +7,7 @@ describe('Test resizeImage function', () => {
     ).toBeRejectedWith(new Error('Input file is missing'));
   });
 
-  it ('should resolve when called', async () => {
+  it('should resolve when called', async () => {
     const width = 800;
     const height = 800;
     await expectAsync(
