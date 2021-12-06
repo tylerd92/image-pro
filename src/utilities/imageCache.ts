@@ -24,4 +24,14 @@ const getCacheSize = () => {
   return cache.size;
 };
 
-export default { addImage, getImage, initializeCache, getCacheSize };
+const getImageCache = () => {
+  return cache;
+};
+
+export default {
+  addImage,
+  getImage,
+  initializeCache,
+  getCacheSize,
+  getImageCache
+};
