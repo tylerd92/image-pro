@@ -1,4 +1,4 @@
-import { Request, response, Response, Router } from 'express';
+import { Request, Response, Router } from 'express';
 import utilities from '../../utilities/utilities';
 import imageCache from '../../utilities/imageCache';
 
@@ -21,11 +21,21 @@ images.get(
     let filename: string = req.query.filename;
     const height = Number(req.query.height);
     const width = Number(req.query.width);
-    if (width === 0 || height === 0) {
+    if (width === 0) {
+      res.status(500).send('Please enter a width that is greater than zero');
+    } else if (height === 0) {
+      res.status(500).send('Please enter a height that is greater than zero');
+    } else if (isNaN(width)) {
       res
         .status(500)
         .send(
-          'Please enter number that is greater than zero for the width and height'
+          'The width you entered is not a number. Please enter a number greater than zero.'
+        );
+    } else if (isNaN(height)) {
+      res
+        .status(500)
+        .send(
+          'The height you entered is not a number. Please enter a number greater than zero.'
         );
     } else {
       try {
